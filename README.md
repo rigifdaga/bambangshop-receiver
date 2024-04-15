@@ -98,3 +98,18 @@ This is the place for you to write reflections:
     - Rust memberikan prioritas pada keamanan memori dengan menggunakan konsep *borrowing* dan primitif konkurensi seperti RwLock dan Mutex untuk mencapai konkurensi yang aman dan efisien, berbeda dengan Java yang lebih sering menggunakan metode langsung untuk mengelola keamanan *thread*.
 
 #### Reflection Subscriber-2
+
+1. Apakah Anda telah menjelajahi bagian kode di luar langkah-langkah tutorial, seperti **src/lib.rs**? Jika belum, jelaskan mengapa Anda tidak melakukannya. Jika sudah, jelaskan apa yang telah Anda pelajari dari bagian kode lain tersebut.
+    - Saya menemukan bahwa penggunaan **lazy_static** untuk inisialisasi variabel global sangat membantu dalam memahami cara menginisialisasi variabel global secara efisien dalam Rust. Variabel global hanya diinisialisasi ketika pertama kali dibutuhkan, yang mengurangi beban saat program dijalankan.
+    - Dari implementasi konfigurasi aplikasi menggunakan file `.env`, saya belajar bahwa pengaturan seperti port, koneksi database, atau token API bisa disimpan secara terpusat dan diakses dengan mudah.
+    - Saya juga belajar tentang manfaat menggunakan tipe `Result<T,E>` dalam mengelola kesalahan di aplikasi Rust. Tipe Result membedakan antara nilai sukses (Ok) dan kesalahan (Err), memungkinkan penanganan kesalahan yang lebih terorganisir.
+    - Penggunaan `Custom<Json>` untuk respons kesalahan memberi saya wawasan tentang cara meningkatkan kejelasan dan kegunaan informasi kesalahan yang disampaikan kepada pengguna.
+
+2. Karena Anda telah menyelesaikan tutorial dan telah mencoba menguji sistem notifikasi Anda dengan memunculkan beberapa instans Receiver, jelaskan bagaimana Pola Observer memudahkan Anda untuk menambahkan lebih banyak pelanggan. Bagaimana jika Anda memunculkan lebih dari satu instans dari aplikasi utama, apakah masih akan mudah untuk ditambahkan ke sistem?
+    - Pola Observer memudahkan penambahan pelanggan baru ke dalam sistem notifikasi. Dengan menyimpan daftar observer, kita bisa menambahkan pelanggan baru tanpa perlu mengubah struktur dasar aplikasi. Pola Observer memungkinkan pengiriman notifikasi ke semua pelanggan yang terdaftar secara efisien.
+    - Namun, saya menemukan tantangan ketika mencoba menggunakan lebih dari satu instans dari aplikasi utama. Setiap instans memiliki Pola Observer-nya sendiri, sehingga jika ingin berbagi notifikasi antar instans, diperlukan mekanisme penyimpanan data bersama yang bisa diakses oleh semua instans. Ini bisa menjadi tantangan dalam memastikan sinkronisasi dan konsistensi antar instans aplikasi, terutama dalam pertukaran informasi atau notifikasi.
+
+3. Apakah Anda telah mencoba membuat Tes Anda sendiri, atau meningkatkan dokumentasi pada koleksi **Postman** Anda? Jika Anda telah mencoba fitur-fitur tersebut, beritahu kami apakah itu berguna untuk pekerjaan Anda (baik itu pekerjaan tutorial Anda atau Proyek Kelompok Anda).
+    - Meskipun saya belum membuat tes atau meningkatkan dokumentasi di Postman, saya percaya bahwa kedua fitur tersebut akan sangat berguna untuk proyek kelompok saya di masa depan.
+    - Dalam proyek kelompok, kemampuan untuk membuat tes yang komprehensif akan sangat penting untuk memastikan bahwa aplikasi kami berfungsi dengan baik. Peningkatan dokumentasi di Postman juga akan memudahkan kerja sama tim dalam pengembangan dan pengujian aplikasi.
+
