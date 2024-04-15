@@ -86,4 +86,15 @@ This is the place for you to write reflections:
 
 #### Reflection Subscriber-1
 
+1. Dalam tutorial ini, kami menggunakan **RwLock<>** untuk menyinkronkan penggunaan **Vec** dari **Notifikasi**. Mengapa ini diperlukan dalam kasus ini, dan mengapa kita tidak menggunakan **Mutex<>** sebagai gantinya?
+    - **RwLock<Vec>** sangat penting untuk mengatur penggunaan vektor yang berisi notifikasi di antara *thread*. RwLock memungkinkan beberapa *reader* untuk mengakses data secara bersamaan, sementara penulisan hanya dapat dilakukan oleh satu *writer* pada satu waktu.
+    - Ini sangat krusial dalam konteks *multi-threading* untuk mencegah kondisi perlombaan dan memastikan konsistensi data.
+    - Pemilihan RwLock dibuat karena memungkinkan banyak operasi baca yang terjadi serentak, yang cocok ketika operasi baca lebih dominan daripada operasi tulis.
+    - Sebaliknya, Mutex membatasi akses ke satu *thread* pada satu waktu, yang dapat memperlambat kinerja ketika banyak operasi baca yang perlu dilakukan secara bersamaan.
+
+2. Dalam tutorial ini, kami menggunakan pustaka eksternal **lazy_static** untuk mendefinisikan **Vec** dan **DashMap** sebagai variabel **"static"**. Dibandingkan dengan Java di mana kita dapat mengubah isi variabel **static** melalui fungsi **static**, mengapa Rust tidak mengizinkan kita melakukan hal yang sama?
+    - Di Rust, perubahan pada variabel **static** tidak diizinkan karena bertentangan dengan prinsip-prinsip *ownership* dan *borrowing*. Ini berkaitan dengan konsep *mutable aliasing*, di mana Rust sangat memprioritaskan keamanan memori dan mencegah kesalahan data dengan aturan ketat mengenai referensi yang dapat diubah dan *shared mutability*.
+    - Di Java, perubahan pada variabel **static** melalui fungsi **static** diizinkan karena pendekatan Java yang lebih fleksibel terhadap keamanan memori, menggunakan sinkronisasi eksplisit seperti *synchronized block* atau variabel *volatile* untuk menjaga keamanan *thread*.
+    - Rust memberikan prioritas pada keamanan memori dengan menggunakan konsep *borrowing* dan primitif konkurensi seperti RwLock dan Mutex untuk mencapai konkurensi yang aman dan efisien, berbeda dengan Java yang lebih sering menggunakan metode langsung untuk mengelola keamanan *thread*.
+
 #### Reflection Subscriber-2
